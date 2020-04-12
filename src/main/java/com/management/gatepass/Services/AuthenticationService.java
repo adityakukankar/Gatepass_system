@@ -1,12 +1,16 @@
 package com.management.gatepass.Services;
 
 import com.management.gatepass.Entity.User;
+import com.management.gatepass.repository.mongo.AuthenticationDAO;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class AuthenticationService {
-    public String registerMember(User id) {
+    @Autowired
+    private AuthenticationDAO authenticationDAO;
 
-        //saveDataInDB()
-        //return success if registration is done else return failure status.
-        return "";
+    public User addUser(User user) {
+
+        authenticationDAO.save(user);
+        return user;
     }
 }

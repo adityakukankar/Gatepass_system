@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Builder
@@ -24,5 +25,6 @@ public class User {
     private String password;
     private boolean enabled;
     @DBRef
-    private Set<Role> roles;
+    private Role roles;
+//    private List<Role> roles;
 }

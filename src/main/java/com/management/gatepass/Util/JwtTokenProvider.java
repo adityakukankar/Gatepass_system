@@ -5,6 +5,7 @@ import com.management.gatepass.Services.LoginActivityService;
 import com.management.gatepass.Services.UserService;
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -40,7 +41,7 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public String createToken(String username, Set<Role> set) {
+    public String createToken(String username, Role set) {
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("roles", set);
         Date now = new Date();

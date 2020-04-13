@@ -1,11 +1,15 @@
 package com.management.gatepass.Services;
 
+import com.management.gatepass.Entity.AuthLoginBody;
 import com.management.gatepass.Entity.Role;
 import com.management.gatepass.Entity.User;
+import com.management.gatepass.Util.JwtTokenProvider;
 import com.management.gatepass.repository.mongo.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +24,25 @@ public class LoginActivityService implements UserDetailsService{
     private static final Logger LOG = LoggerFactory.getLogger(LoginActivityService.class);
 
     @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    JwtTokenProvider jwtTokenProvider;
+
+    @Autowired
     private UserRepository userRepository;
+
+    public Map<Object, Object> getAuthDetails(AuthLoginBody data) {
+        String username = data.getEmail();
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
+        String token = jwtTokenProvider.createToken(username, this.userRepository.findByEmail(username).getRoles());
+        Role roles = this.userRepository.findByEmail(username).getRoles();
+        Map<Object, Object> model = new HashMap<>();
+        model.put("username", username);
+        model.put("token", token);
+        model.put("roles", roles);
+        return model;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -34,12 +56,11 @@ public class LoginActivityService implements UserDetailsService{
         }
     }
 
-    private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
+    private List<GrantedAuthority> getUserAuthority(Role userRoles) {
         Set<GrantedAuthority> roles = new HashSet<>();
-        userRoles.forEach((role) -> {
-            roles.add(new SimpleGrantedAuthority(role.getRole()));
-        });
-
+        roles.add(new SimpleGrantedAuthority(userRoles.getRole()));
+        /*userRoles.forEach((role) -> {
+        }); When role was set/list*/
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles);
         return grantedAuthorities;
     }

@@ -28,7 +28,6 @@ public class MongoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
         roleRepository.deleteAll();
         List<Role> roleList = Arrays.asList(new Role("1","ADMIN"),new Role("2","USER"));
         for(Role role: roleList)

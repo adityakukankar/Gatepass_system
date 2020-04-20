@@ -1,10 +1,9 @@
 package com.management.gatepass.repository.mongo;
 
-import java.util.List;
-
-import com.management.gatepass.Entity.GatepassDetails;
 import com.management.gatepass.Entity.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
+
+import java.util.List;
 
 public interface UserRepository extends MongoRepository<User, String> {
 

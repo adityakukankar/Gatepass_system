@@ -1,29 +1,22 @@
 package com.management.gatepass.Controller;
 
-import static org.springframework.http.ResponseEntity.ok;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import com.management.gatepass.Entity.AuthLoginBody;
 import com.management.gatepass.Entity.User;
+import com.management.gatepass.HttpBody.AuthLoginBody;
 import com.management.gatepass.Services.LoginActivityService;
 import com.management.gatepass.Services.UserService;
-import com.management.gatepass.Util.JwtTokenProvider;
-import com.management.gatepass.repository.mongo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 
 @CrossOrigin(origins = "*")
 @RestController()
-@RequestMapping("/gatepass/auth")
+@RequestMapping("/auth/v1")
 public class AuthenticationController {
 
     @Autowired

@@ -1,6 +1,6 @@
 package com.management.gatepass.Services;
 
-import com.management.gatepass.Entity.AuthLoginBody;
+import com.management.gatepass.HttpBody.AuthLoginBody;
 import com.management.gatepass.Entity.Role;
 import com.management.gatepass.Entity.User;
 import com.management.gatepass.Util.JwtTokenProvider;

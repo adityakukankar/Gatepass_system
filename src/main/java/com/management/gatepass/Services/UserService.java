@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class UserService{
@@ -41,8 +38,8 @@ public class UserService{
         return userRepository.findAll();
     }
 
-    public User findById(String id) {
-        return userRepository.findById(id).orElseGet(null);
+    public Optional<User> findById(String id) {
+        return userRepository.findById(id);
     }
 
     public void updateUser(User currentUser, User user) {
@@ -51,5 +48,12 @@ public class UserService{
 
     public void deleteUserById(String id) {
         userRepository.deleteById(id);
+    }
+
+    public Map<Object, Object> getAllUsersDetails(List<User> users) {
+        Map<Object, Object> userDetails = new HashMap<>();
+        userDetails.put("UserCount", users.size());
+        userDetails.put("UserList", users);
+        return  userDetails;
     }
 }

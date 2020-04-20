@@ -1,6 +1,4 @@
 package com.management.gatepass.Util;
-import javax.servlet.http.HttpServletResponse;
-
 import com.management.gatepass.Services.LoginActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebSecurity
@@ -41,14 +41,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/gatepass/auth/**")
+                .antMatchers("/auth/v1/**")   //authentication
                 .permitAll()
-                .antMatchers("/gatepass/v1/users/**")
-                .permitAll()
-                .antMatchers("/gatepass/v1/alldetails")
+                .antMatchers("/gatepass/v1/user/**")
+                .hasAuthority("USER")
+                .antMatchers("/gatepass/v1/admin/**")
                 .hasAuthority("ADMIN")
-                .antMatchers("/gatepass/v1/**")
-                .permitAll()
+                .antMatchers("/users/v1/admin/**")
+                .hasAuthority("ADMIN")
+                .antMatchers("/users/v1/user/**")
+                .hasAuthority("USER")
                 .and()
                 .csrf()
                 .disable()

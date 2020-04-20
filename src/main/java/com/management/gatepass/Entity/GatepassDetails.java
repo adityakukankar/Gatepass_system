@@ -1,30 +1,21 @@
 package com.management.gatepass.Entity;
 
-import com.management.gatepass.Constants.GatepassTypeEnum;
-import lombok.*;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-import java.time.LocalDate;
+import java.time.LocalTime;
 
-@Builder
 @ToString
 @Setter @Getter
-@Document(collection = "gatepassdetails" )
+@Builder
 public class GatepassDetails {
-    private LocalDate date;
-    private String location;
-    private GatepassTypeEnum gatepassTypeEnum;
-    //get this from user details
-    private String personFirstName;
-    private String personLastName;
+    private LocalTime entryTime;
+    private LocalTime exitTime;
     private String description;
     private String passNumber;
     private String contents;
     private String vehicleNumber;
-    private String purpose;
-    private LocalDate inTime;
-    private String watchManName;
-    private String designation;
-    private String AuthPersonName;
+    private String purposeOfVisit;
 }
-

@@ -1,3 +1,4 @@
+/*
 package com.management.gatepass;
 
 import com.management.gatepass.Entity.Role;
@@ -29,3 +30,4 @@ public class MongoApplication implements CommandLineRunner {
     }
 
 }
+*/

@@ -64,7 +64,14 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- API, java.xml.bind module deprecated in java9/10 and removed in java 11-->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
     </dependencies>
+
 
     <dependencyManagement>
         <dependencies>

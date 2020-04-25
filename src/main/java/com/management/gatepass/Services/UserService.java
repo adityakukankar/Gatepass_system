@@ -5,6 +5,7 @@ import com.management.gatepass.Entity.User;
 import com.management.gatepass.repository.mongo.RoleRepository;
 import com.management.gatepass.repository.mongo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,11 @@ public class UserService{
     private PasswordEncoder bCryptPasswordEncoder;
 
     public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+        User user = userRepository.findByEmail(email);
+        if (user != null)
+            throw new BadCredentialsException("User with username: " + user.getEmail() + " already exists");
+        else
+            return user;
     }
 
     public void saveUser(User user) {

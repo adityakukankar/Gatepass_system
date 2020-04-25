@@ -9,12 +9,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -32,11 +34,16 @@ public class LoginActivityService implements UserDetailsService{
     @Autowired
     private UserRepository userRepository;
 
-    public Map<Object, Object> getAuthDetails(AuthLoginBody data) {
+    @Autowired
+    private PasswordEncoder bCryptPasswordEncoder;
+
+    public Map<Object, Object> getAuthDetails(AuthLoginBody data) throws BadCredentialsException {
         String username = data.getEmail();
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
-        String token = jwtTokenProvider.createToken(username, this.userRepository.findByEmail(username).getRoles());
-        Role roles = this.userRepository.findByEmail(username).getRoles();
+        // TODO securing sensitive data.
+        String password = data.getPassword();
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+        String token = jwtTokenProvider.createToken(username, userRepository.findByEmail(username).getRoles());
+        Role roles = userRepository.findByEmail(username).getRoles();
         Map<Object, Object> model = new HashMap<>();
         model.put("username", username);
         model.put("token", token);

@@ -7,7 +7,6 @@ import com.management.gatepass.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +31,7 @@ public class AuthenticationController {
             Map<Object, Object> authDetails = loginActivityService.getAuthDetails(data);
             return new ResponseEntity<>(authDetails, HttpStatus.OK);
         } catch (AuthenticationException e) {
-            throw new BadCredentialsException("Invalid email/password supplied");
+            return new ResponseEntity<>("Invalid email/password supplied", HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -41,7 +40,7 @@ public class AuthenticationController {
     public ResponseEntity register(@RequestBody User user) {
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
-            throw new BadCredentialsException("User with username: " + user.getEmail() + " already exists");
+            return new ResponseEntity<>("User with username: " + user.getEmail() + " already exists", HttpStatus.BAD_REQUEST);
         }
         userService.saveUser(user);
         String status = "User registered successfully";

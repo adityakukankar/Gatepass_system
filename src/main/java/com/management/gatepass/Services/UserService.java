@@ -2,8 +2,8 @@ package com.management.gatepass.Services;
 
 import com.management.gatepass.Entity.Role;
 import com.management.gatepass.Entity.User;
-import com.management.gatepass.repository.mongo.RoleRepository;
-import com.management.gatepass.repository.mongo.UserRepository;
+import com.management.gatepass.Repository.mongo.RoleRepository;
+import com.management.gatepass.Repository.mongo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;

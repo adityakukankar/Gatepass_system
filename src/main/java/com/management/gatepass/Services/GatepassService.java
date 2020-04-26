@@ -6,7 +6,7 @@ import com.management.gatepass.Entity.AuthurizingPersonDetails;
 import com.management.gatepass.Entity.Gatepass;
 import com.management.gatepass.HttpBody.GatepassInfo;
 import com.management.gatepass.Translators.GatepassTranslator;
-import com.management.gatepass.repository.mongo.GatepassRepository;
+import com.management.gatepass.Repository.mongo.GatepassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,10 +34,8 @@ public class GatepassService {
 
     public String fetchStatusById(String id) {
         Optional<Gatepass> gatepass = gatepassRepository.findById(id);
-        if (gatepass.isEmpty())
-            return null;
+        return gatepass.map(value -> value.getStatus().getValue()).orElse(null);
 
-        return gatepass.get().getStatus().getValue();
     }
 
     public String saveFormDetails(GatepassInfo gatepassInfo) {

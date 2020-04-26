@@ -56,21 +56,25 @@
 
 	
 	<!-- <div class="page-inner"> -->
-	<nav class="gtco-nav" role="navigation">
-		<div class="gtco-container">
-			
-			<div class="row">
-				<div class="col-sm-4 col-xs-12">
-					<a href="index.html">
-						<img border="0" alt="W3Schools" src="images/indian-oil-logo.png">
-					</a>
+		<nav class="gtco-nav" role="navigation">
+			<div class="gtco-container">
+				<div class="row">
+					<div class="col-sm-4 col-xs-12">
+						<div id="gtco-logo"><a href="index.html">
+							<img border="0" alt="W3Schools" src="images/indian-oil-logo.png" width="200" height="100">
+						</a>
+						</div>
+					</div>
+					<div class="col-xs-8 text-right menu-1">
+						<ul>
+							<li><a href="#Raise-Request">Raise Request</a></li>
+							<li><a href="#Status">Request Status</a></li>
+						</ul>
+					</div>
 				</div>
-				<div class="col-xs-8 text-right menu-1">
-				</div>
+
 			</div>
-			
-		</div>
-	</nav>
+		</nav>
 	
 	<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(images/img_6.jpg)">
 		<div class="overlay"></div>
@@ -94,8 +98,8 @@
 			<div class="gtco-container">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="col-md-6 animate-box">
-							<h3>Raise permission request</h3>
+						<div id="Raise-Request" class="col-md-6 animate-box">
+							<h2>Raise Request</h2>
 							<form action="#">
 								<div class="row form-group">
 									<div class="col-md-12">
@@ -167,24 +171,31 @@
 
 
 		<div id="gtco-subscribe">
-		<div class="gtco-container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
-					<h2>Will see permissions here</h2>
-					<p></p>
+			<div class="gtco-container">
+				<div class="row animate-box">
+					<div id="Permissions" class="col-md-8 col-md-offset-2 text-center gtco-heading">
+						<h2>Transport Permissions</h2>
+						<p></p>
+					</div>
 				</div>
-			</div>
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2">
-					<form class="form-inline">
-						<div class="col-md-6 col-sm-6">
-
-						</div>
-					</form>
+				<div class="row animate-box">
+					<div class="col-md-8 col-md-offset-2">
+						<form class="form-inline">
+							<div class="col-md-6 col-sm-6">
+								<button type="button" onclick="window.location.href = 'admin-permission-table.html';"
+										class="btn btn-default btn-block">View Live Permissions
+								</button>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<button type="button" onclick="window.location.href = 'all-user-table.html';"
+										class="btn btn-default btn-block">View All Permissions
+								</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
 		<footer id="gtco-footer" role="contentinfo">
 			<div class="gtco-container">

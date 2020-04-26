@@ -1,4 +1,4 @@
-package com.management.gatepass.repository.mongo;
+package com.management.gatepass.Repository.mongo;
 
 import com.management.gatepass.Entity.User;
 import org.springframework.data.mongodb.repository.MongoRepository;

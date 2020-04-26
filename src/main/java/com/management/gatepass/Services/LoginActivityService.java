@@ -4,7 +4,7 @@ import com.management.gatepass.HttpBody.AuthLoginBody;
 import com.management.gatepass.Entity.Role;
 import com.management.gatepass.Entity.User;
 import com.management.gatepass.Util.JwtTokenProvider;
-import com.management.gatepass.repository.mongo.UserRepository;
+import com.management.gatepass.Repository.mongo.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
